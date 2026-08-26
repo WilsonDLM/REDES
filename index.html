@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Capa 3: Red - Modelo OSI</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <main class="container">
+    <article class="card">
+      <span class="tag">Modelo OSI</span>
+      <h1>Capa 3: Capa de Red</h1>
+      
+      <p class="intro">
+        Es la encargada del <strong>direccionamiento lógico</strong> y del <strong>enrutamiento</strong>. Permite que los datos viajen entre dispositivos ubicados en redes totalmente distintas a través de la mejor ruta posible.
+      </p>
+
+      <section class="details">
+        
+        <!-- Tarjetas rápidas -->
+        <h3>Datos Rápidos</h3>
+        <div class="info-grid">
+          <div class="info-box">
+            <h4> PDU (Unidad)</h4>
+            <p><strong>Paquete IP</strong></p>
+          </div>
+          <div class="info-box">
+            <h4> Dispositivo</h4>
+            <p><strong>Router</strong> / Switch Capa 3</p>
+          </div>
+          <div class="info-box">
+            <h4> Dirección</h4>
+            <p><strong>IP Lógica</strong> (Origen y Destino)</p>
+          </div>
+        </div>
+
+        <!-- Funciones Clave -->
+        <h3>Funciones Clave:</h3>
+        <ul>
+          <li><strong>Direccionamiento IP:</strong> Asigna identidades únicas a cada nodo de la red.</li>
+          <li><strong>Enrutamiento (Routing):</strong> Selección de rutas óptimas mediante tablas de enrutamiento.</li>
+          <li><strong>Encapsulamiento / Desencapsulamiento:</strong> Añade o remueve la cabecera IP sobre la PDU de transporte (Segmento).</li>
+          <li><strong>Fragmentación y Reensamblado:</strong> Divide paquetes si sobrepasan el tamaño máximo del medio.</li>
+        </ul>
+
+        <!-- Conceptos Técnicos Críticos -->
+        <h3>Conceptos Clave que debes Explicar:</h3>
+        <div class="tech-grid">
+          <div class="tech-card">
+            <strong>⏱️ TTL (Time to Live)</strong>
+            <span>Evita bucles infinitos en la red reduciendo un contador en cada router hasta llegar a 0.</span>
+          </div>
+          <div class="tech-card">
+            <strong>📏 MTU (Max Transmission Unit)</strong>
+            <span>Límite de tamaño de datos (normalmente 1500 bytes en Ethernet) antes de fragmentar.</span>
+          </div>
+          <div class="tech-card">
+            <strong>📊 Tabla de Enrutamiento</strong>
+            <span>La "hoja de ruta" interna del router para decidir hacia dónde reenviar el paquete.</span>
+          </div>
+          <div class="tech-card">
+            <strong>🎭 Subnetting / Máscara</strong>
+            <span>Permite subdividir redes grandes en subredes más pequeñas y eficientes.</span>
+          </div>
+        </div>
+
+        <!-- Protocolos e Infraestructura Interactivos -->
+        <h3>Protocolos e Infraestructura:</h3>
+        <div class="protocols">
+          <button class="badge-btn" data-proto="ipv4">IPv4</button>
+          <button class="badge-btn" data-proto="ipv6">IPv6</button>
+          <button class="badge-btn" data-proto="icmp">ICMP</button>
+          <button class="badge-btn" data-proto="ospf">OSPF</button>
+          <button class="badge-btn" data-proto="bgp">BGP</button>
+          <button class="badge-btn" data-proto="arp">ARP</button>
+          <button class="badge-btn" data-proto="rip">RIP</button>
+        </div>
+
+        <!-- Panel desplegable hacia abajo -->
+        <div id="protocol-info" class="protocol-display hidden">
+          <div class="display-header">
+            <h4 id="proto-title">Protocolo</h4>
+            <button id="close-info-btn" class="close-btn">&times; Cerrar</button>
+          </div>
+          <ul id="proto-list" class="proto-details-list">
+            <!-- La información se inserta de forma vertical dinámicamente -->
+          </ul>
+        </div>
+
+      </section>
+    </p>
+      <button class="badge-btn2" id="mostrarInfo">Mostrar mi información</button>
+
+<div id="resultado"> el json se cambio de nombre</div>
+
+<script>
+document.getElementById("mostrarInfo").addEventListener("click", async () => {
+    try {
+        const respuesta = await fetch("https://api.ipify.org?format=json");
+        const datos = await respuesta.json();
+
+        document.getElementById("resultado").innerHTML = `
+            <p><strong>IP pública:</strong> ${datos.ip}</p>
+          
+        `;
+    } catch (error) {
+        document.getElementById("resultado").textContent =
+            "No se pudo obtener la información.";
+    }
+});
+</script>
+
+      <button id="toggle-btn" class="btn">Ocultar detalles</button>
+    </article>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
